@@ -168,7 +168,6 @@ export default {
     if (localStorage.q5){
       this.q5 = JSON.parse(localStorage.q5);
       this.q5.forEach((item, i) => {
-        console.log(item.a);
         if(item.a){
           this.quizNumber = i + 1;
         }
@@ -186,9 +185,7 @@ export default {
       localStorage.q5 = JSON.stringify(newArr);
       this.quizNumber = this.quizNumber + 1;
       if( this.quizNumber >= this.q5.length ){
-
         this.$router.push('/result');
-
       }
     }
   }

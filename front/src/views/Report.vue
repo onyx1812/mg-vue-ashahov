@@ -9,8 +9,8 @@
               <label :for="`filter_${i}`">{{ filter.label }}</label>
               <div v-if="filter.id === 2">
                 <div class="row">
-                  <div class="col"><input type="number" v-model.number="filters_model_agemin" placeholder="от" min="12" max="120" step="1"></div>
-                  <div class="col"><input type="number" v-model.number="filters_model_agemax" placeholder="до" min="12" max="120" step="1"></div>
+                  <div class="col"><input type="number" v-model="filters_q0_min" placeholder="от" min="1" max="120" step="1"></div>
+                  <div class="col"><input type="number" v-model="filters_q0_max" placeholder="до" min="0" max="120" step="1"></div>
                 </div>
               </div>
               <div v-else>
@@ -29,15 +29,10 @@
             <div class="filter" v-for="(filter, i) in filters_q1">
               <label :for="`filter_${i}`">{{ filter }}</label>
               <div class="row">
-                <div class="col"><input type="number" v-model.number="filters_q1_model[i]" placeholder="от" min="0" max="100" step="1"></div>
-                <div class="col"><input type="number" v-model.number="filters_q1_model[i]" placeholder="до" min="0" max="100" step="1"></div>
+                <div class="col"><input type="number" v-model="filters_q1_min[i]" placeholder="от" min="0" max="100" step="1"></div>
+                <div class="col"><input type="number" v-model="filters_q1_max[i]" placeholder="до" min="0" max="100" step="1"></div>
               </div>
             </div>
-
-            <!-- Операциональная материальная установка
-            Операциональная ментальная установка
-            Целевая установка
-            мысловая установка -->
             <span @click="openFilter" class="open-filter"> фильтр</span>
           </div>
         </div>
@@ -47,49 +42,10 @@
             <div class="filter" v-for="(filter, i) in filters_q2">
               <label :for="`filter_${i}`">{{ filter }}</label>
               <div class="row">
-                <div class="col"><input type="number" v-model.number="filters_q2_model[i]" placeholder="от" min="0" max="100" step="1"></div>
-                <div class="col"><input type="number" v-model.number="filters_q2_model[i]" placeholder="до" min="0" max="100" step="1"></div>
+                <div class="col"><input type="number" v-model="filters_q2_min[i]" placeholder="от" min="0" max="100" step="1"></div>
+                <div class="col"><input type="number" v-model="filters_q2_max[i]" placeholder="до" min="0" max="100" step="1"></div>
               </div>
             </div>
-<!--             Тревожность
-            Враждебность
-            Депрессия
-            Рефлексия
-            Импульсивность
-            Ранимость
-            Нейротизм
-
-            Сердечность
-            Общительность
-            Настойчивость
-            Активность
-            Поиск возбуждения
-            Позитивные эмоции
-            Экстраверсия
-
-            Фантазия
-            Эстетика
-            Чувства
-            Действия
-            Идеи
-            Ценности
-            Открытость опыту
-
-            Доверие
-            Честность
-            Альтруизм
-            Уступчивость
-            Скромность
-            Чуткость
-            Сотрудничество
-
-            Компетентность
-            Организованность
-            Послушность долгу
-            Стремление к достижениям
-            Самодисциплина
-            Обдумывание поступков
-            Добросовестность -->
             <span @click="openFilter" class="open-filter"> фильтр</span>
           </div>
         </div>
@@ -99,22 +55,10 @@
             <div class="filter" v-for="(filter, i) in filters_q3">
               <label :for="`filter_${i}`">{{ filter }}</label>
               <div class="row">
-                <div class="col"><input type="number" v-model.number="filters_q3_model[i]" placeholder="от" min="0" max="100" step="1"></div>
-                <div class="col"><input type="number" v-model.number="filters_q3_model[i]" placeholder="до" min="0" max="100" step="1"></div>
+                <div class="col"><input type="number" v-model="filters_q3_min[i]" placeholder="от" min="0" max="100" step="1"></div>
+                <div class="col"><input type="number" v-model="filters_q3_max[i]" placeholder="до" min="0" max="100" step="1"></div>
               </div>
             </div>
-            <!-- Невротичность
-            Спонтанная агрессивность
-            Депрессивность
-            Раздражительность
-            Общительность
-            Уравновешенность
-            Реактивная агрессивность
-            Застенчивость
-            Открытость
-            Экстраверсия–интроверсия
-            Эмоциональная лабильность
-            Маскулинизм–феминизм -->
             <span @click="openFilter" class="open-filter"> фильтр</span>
           </div>
         </div>
@@ -124,22 +68,10 @@
             <div class="filter" v-for="(filter, i) in filters_q4">
               <label :for="`filter_${i}`">{{ filter }}</label>
               <div class="row">
-                <div class="col"><input type="number" v-model.number="filters_q4_model[i]" placeholder="от" min="0" max="100" step="1"></div>
-                <div class="col"><input type="number" v-model.number="filters_q4_model[i]" placeholder="до" min="0" max="100" step="1"></div>
+                <div class="col"><input type="number" v-model="filters_q4_min[i]" placeholder="от" min="0" max="100" step="1"></div>
+                <div class="col"><input type="number" v-model="filters_q4_max[i]" placeholder="до" min="0" max="100" step="1"></div>
               </div>
             </div>
-            <!-- Переживание психотравмирующих обстоятельств
-            Неудовлетворенность собой
-            «Загнанность в клетку»
-            Тревога и депрессия
-            Неадекватное избирательное эмоциональное реа­гирование
-            Эмоционально-нравственная дезориентация
-            Расширение сферы экономии эмоций
-            Редукция профессиональных обязанностей
-            Эмоциональный дефицит
-            Эмоциональная отстраненность
-            Личностная отстраненность (деперсонализация)
-            Психосоматические и психовегетативные нарушения -->
             <span @click="openFilter" class="open-filter"> фильтр</span>
           </div>
         </div>
@@ -149,13 +81,10 @@
             <div class="filter" v-for="(filter, i) in filters_q5">
               <label :for="`filter_${i}`">{{ filter }}</label>
               <div class="row">
-                <div class="col"><input type="number" v-model.number="filters_q5_model[i]" placeholder="от" min="0" max="100" step="1"></div>
-                <div class="col"><input type="number" v-model.number="filters_q5_model[i]" placeholder="до" min="0" max="100" step="1"></div>
+                <div class="col"><input type="number" v-model="filters_q5_min[i]" placeholder="от" min="0" max="100" step="1"></div>
+                <div class="col"><input type="number" v-model="filters_q5_max[i]" placeholder="до" min="0" max="100" step="1"></div>
               </div>
             </div>
-            <!-- Сила процессов возбуждения
-            Сила процессов торможения
-            Подвижность нервных процессов -->
             <span @click="openFilter" class="open-filter"> фильтр</span>
           </div>
         </div>
@@ -241,73 +170,81 @@ export default {
         }
       ],
       filters_model: ['default', 'age', 'default', 'default', 'default', 'default', 'default', 'default', 'default', 'default', 'default', 'default', 'default'],
-      filters_model_agemin: 'от',
-      filters_model_agemax: 'до',
+      filters_q0_min: false,
+      filters_q0_max: false,
       filteredData: false,
 
       filters_q1: ['Операциональная материальная установка', 'Операциональная ментальная установка', 'Целевая установка', 'Смысловая установка'],
-      filters_q1_model:[],
+      filters_q1_min:[],
+      filters_q1_max:[],
       filters_q2: ['Тревожность', 'Враждебность', 'Депрессия', 'Рефлексия', 'Импульсивность', 'Ранимость', 'Нейротизм', 'Сердечность', 'Общительность', 'Настойчивость', 'Активность', 'Поиск возбуждения', 'Позитивные эмоции', 'Экстраверсия', 'Фантазия', 'Эстетика', 'Чувства', 'Действия', 'Идеи', 'Ценности', 'Открытость опыту', 'Доверие', 'Честность', 'Альтруизм', 'Уступчивость', 'Скромность', 'Чуткость', 'Сотрудничество', 'Компетентность', 'Организованность', 'Послушность долгу', 'Стремление к достижениям', 'Самодисциплина', 'Обдумывание поступков', 'Добросовестность'],
-      filters_q2_model:[],
+      filters_q2_min:[],
+      filters_q2_max:[],
       filters_q3: ['Невротичность', 'Спонтанная агрессивность', 'Депрессивность', 'Раздражительность', 'Общительность', 'Уравновешенность', 'Реактивная агрессивность', 'Застенчивость', 'Открытость', 'Экстраверсия–интроверсия', 'Эмоциональная лабильность', 'Маскулинизм–феминизм'],
-      filters_q3_model:[],
+      filters_q3_min:[],
+      filters_q3_max:[],
       filters_q4: ['Переживание психотравмирующих обстоятельств', 'Неудовлетворенность собой', '«Загнанность в клетку»', 'Тревога и депрессия', 'Неадекватное избирательное эмоциональное реа­гирование', 'Эмоционально-нравственная дезориентация', 'Расширение сферы экономии эмоций', 'Редукция профессиональных обязанностей', 'Эмоциональный дефицит', 'Эмоциональная отстраненность', 'Личностная отстраненность (деперсонализация)', 'Психосоматические и психовегетативные нарушения'],
-      filters_q4_model:[],
+      filters_q4_min:[],
+      filters_q4_max:[],
       filters_q5: ['Сила процессов возбуждения', 'Сила процессов торможения', 'Подвижность нервных процессов'],
-      filters_q5_model:[],
+      filters_q5_min:[],
+      filters_q5_max:[],
     }
   },
-  mounted(){
-    Request.get()
-      .then(result => {
-        this.Users = result;
-        console.log(this.Users);
-      })
-        .catch(err => console.error(err))
-  },
-//  filters: {
-    // dateFilter(val){
-    //   let newDate = new Date(val);
-    //   return `${newDate.getHours()}:${newDate.getMinutes()}:${newDate.getSeconds()}  ${newDate.getDay()}/${newDate.getMonth() + 1}/${newDate.getFullYear()}`;
-    // },
-    // reverse(val) {
-    //   return val.slice().reverse();
-    // },
-    // telTo(val){
-    //   return val.replace(/[^\dA-Z]/g, '').replace(/[\s-)(]/g, '').split('').toString().replace(/[,]/g, '');;
-    // }
-//  },
   methods: {
     filterAction(e){
       e.preventDefault();
-      const newData = this.Users;
-      this.filters_model.forEach((option, i) => {
-        if(option === "age" ){
-          console.log('------------');
-          console.log(this.Users);
-          console.log('------------');
-          this.Users.forEach((item, l) => {
-            let userData = JSON.parse(item.q0);
-            if( (Number(userData[1].a) >= this.filters_model_agemin) && (Number(userData[1].a) <= this.filters_model_agemax) ){
-              console.log('nice');
-            } else {
-              console.log('ne nice');
-              delete newData[l];
+
+      Request.get()
+        .then(result => {
+          let newData = result;
+          console.log(newData);
+
+          this.filters_model.forEach((filter, i) => {
+            if(filter === "age" ){
+              if( this.filters_q0_min ){
+                newData.forEach((user, l) => {
+                  let userData = JSON.parse(user.q0);
+                  if( Number(userData[i].a) < Number(this.filters_q0_min) ) delete newData[l];
+                });
+              }
+              if( this.filters_q0_max ){
+                newData.forEach((user, l) => {
+                  let userData = JSON.parse(user.q0);
+                  if( Number(userData[i].a) > Number(this.filters_q0_max) ) delete newData[l];
+                });
+              }
+            } else if(filter !== "default"){
+              newData.forEach((user, l) => {
+                let userData = JSON.parse(user.q0);
+                if( userData[i].a !== filter ) delete newData[l];
+              });
             }
           });
-        } else if(option === "default"){
-          console.log(option);
-        } else {
-          newData.forEach((item, l) => {
-            let q0 = JSON.parse(item.q0);
-            if( q0[i].a !== option ){
-              newData.splice(l, 1);
+
+          console.log( newData );
+
+          this.filters_q1.forEach((filter, i) => {
+            if( this.filters_q1_min[i] ){
+              newData.forEach((user, l) => {
+                let userData = JSON.parse(user.q1);
+                if( Number(userData[i].res) < Number(this.filters_q1_min[i]) ) delete newData[l];
+              });
+            }
+            if( this.filters_q1_max[i] ){
+              newData.forEach((user, l) => {
+                let userData = JSON.parse(user.q1);
+                if( Number(userData[i].res) > Number(this.filters_q1_max[i]) ) delete newData[l];
+              });
             }
           });
-        }
-      });
-      this.filteredData = newData;
-      console.log(this.filteredData);
+
+          this.filteredData = newData;
+          console.log(this.filteredData);
+          console.log('----------final----------');
+        })
+          .catch(err => console.error(err))
+
     },
     openFilter(e){
       e.preventDefault();

@@ -11,8 +11,6 @@ export default {
   name: 'result',
   data(){
     return {
-      show: false,
-
       qIde: false,
 
       q0: false,
@@ -208,7 +206,7 @@ export default {
     if(!localStorage.qIde || !localStorage.q0 || !localStorage.q1 || !localStorage.q2 || !localStorage.q3 || !localStorage.q4 || !localStorage.q5) this.$router.push('/');
 
     let q5 = JSON.parse(localStorage.q5);
-    if( !q5[q5.length - 1].a ) this.$router.push('/');
+    if( !q5[q5.length - 1].a ) this.$router.push('/')
   },
   mounted() {
     if(localStorage.qIde) this.qIde = JSON.parse(localStorage.qIde);
@@ -894,13 +892,19 @@ export default {
       ]
     }
 
-    Request.add(data)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    let sent = JSON.parse(localStorage.sent);
+    if( !sent ){
+      Request.add(data)
+        .then(res => {
+          localStorage.sent = true;
+          console.log('sent true');
+        })
+        .catch(err => {
+          if(res.status === "succeeded") localStorage.sent = false;
+        });
+    } else{
+      console.log('you already done.');
+    }
   }
 }
 </script>
