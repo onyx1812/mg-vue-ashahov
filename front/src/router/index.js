@@ -21,11 +21,6 @@ const routes = [
     component: () => import('../views/Report.vue')
   },
   {
-    path: '/export',
-    name: 'export',
-    component: () => import('../views/Export.vue')
-  },
-  {
     path: '*',
     redirect: '/'
   }

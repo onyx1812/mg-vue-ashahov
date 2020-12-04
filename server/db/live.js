@@ -1,6 +1,6 @@
 module.exports = {
   host:     'localhost',
-  database: 'vitefit',
-  user:     'admin',
-  password: 'BWJL)an-H(Ml'
+  database: 'mg-vue-ashahov',
+  user:     'mysql',
+  password: 'mysql'
 }
