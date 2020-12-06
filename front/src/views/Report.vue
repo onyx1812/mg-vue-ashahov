@@ -635,6 +635,7 @@ export default {
   width: 400px;
   margin: 60px auto 0;
   display: block;
+  max-width: 100%;
 }
 h3{
   margin-bottom: 15px;

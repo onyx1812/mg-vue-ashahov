@@ -28,9 +28,12 @@ export default {
   background: #fff;
 }
 .main{
-  padding: 30px 0;
-  min-height: calc(100vh - 160px);
+  padding: 50px 0;
+  min-height: calc(100vh - 100px);
   display: flex;
   align-items: center;
+  @media (min-width: 768px) {
+    min-height: calc(100vh - 160px);
+  }
 }
 </style>

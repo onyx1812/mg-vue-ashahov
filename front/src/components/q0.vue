@@ -150,7 +150,16 @@ export default {
   transition: transform .25s ease;
   color: #000;
   width: 140px;
+  @media (max-width: 768px) {
+    height: 49px;
+    top: 3px;
+    position: relative;
+    padding: 10px 60px 10px 15px;
+    z-index: 1;
+  } 
   & + .btn{
+    z-index: 2;
+    position: relative;
     &:hover{
       transform: scale(1.025);
     }

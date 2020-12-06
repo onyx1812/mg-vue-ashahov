@@ -1,11 +1,11 @@
 <template>
-  <div class="quesion">
+  <div class="quesion" v-if="loading">
     <h2>{{ title }}</h2>
     <h3>{{ subtitle }}</h3>
     <h4>{{ description }}</h4>
     <div class="question">
       <div class="count"><span>{{this.quizNumber + 1}}</span> из {{ this.quiz.length }}</div>
-      <h5>{{ quiz[this.quizNumber].q }}</h5>
+      <h5>{{ quiz[this.quizNumber].q }}</h5> 
       <div class="answers">
         <button class="btn" v-for="answer in quiz[this.quizNumber].a" @click="quizAction" :value="answer" >{{ answer }}</button>
       </div>
@@ -17,6 +17,7 @@ export default {
   name: 'q5',
   data(){
     return {
+      loading: true,
       quizNumber: 0,
       title: 'Методика № 5',
       subtitle: 'Опросник темперамента Я. Стреляу в адаптации Н.Н. Даниловой и А.Г. Шмелева',
@@ -160,21 +161,17 @@ export default {
       q5: [{id: 1, a: false}, {id: 2, a: false}, {id: 3, a: false}, {id: 4, a: false}, {id: 5, a: false}, {id: 6, a: false}, {id: 7, a: false}, {id: 8, a: false}, {id: 9, a: false}, {id: 10, a: false}, {id: 11, a: false}, {id: 12, a: false}, {id: 13, a: false}, {id: 14, a: false}, {id: 15, a: false}, {id: 16, a: false}, {id: 17, a: false}, {id: 18, a: false}, {id: 19, a: false}, {id: 20, a: false}, {id: 21, a: false}, {id: 22, a: false}, {id: 23, a: false}, {id: 24, a: false}, {id: 25, a: false}, {id: 26, a: false}, {id: 27, a: false}, {id: 28, a: false}, {id: 29, a: false}, {id: 30, a: false}, {id: 31, a: false}, {id: 32, a: false}, {id: 33, a: false}, {id: 34, a: false}, {id: 35, a: false}, {id: 36, a: false}, {id: 37, a: false}, {id: 38, a: false}, {id: 39, a: false}, {id: 40, a: false}, {id: 41, a: false}, {id: 42, a: false}, {id: 43, a: false}, {id: 44, a: false}, {id: 45, a: false}, {id: 46, a: false}, {id: 47, a: false}, {id: 48, a: false}, {id: 49, a: false}, {id: 50, a: false}, {id: 51, a: false}, {id: 52, a: false}, {id: 53, a: false}, {id: 54, a: false}, {id: 55, a: false}, {id: 56, a: false}, {id: 57, a: false}, {id: 58, a: false}, {id: 59, a: false}, {id: 60, a: false}, {id: 61, a: false}, {id: 62, a: false}, {id: 63, a: false}, {id: 64, a: false}, {id: 65, a: false}, {id: 66, a: false}, {id: 67, a: false}, {id: 68, a: false}, {id: 69, a: false}, {id: 70, a: false}, {id: 71, a: false}, {id: 72, a: false}, {id: 73, a: false}, {id: 74, a: false}, {id: 75, a: false}, {id: 76, a: false}, {id: 77, a: false}, {id: 78, a: false}, {id: 79, a: false}, {id: 80, a: false}, {id: 81, a: false}, {id: 82, a: false}, {id: 83, a: false}, {id: 84, a: false}, {id: 85, a: false}, {id: 86, a: false}, {id: 87, a: false}, {id: 88, a: false}, {id: 89, a: false}, {id: 90, a: false}, {id: 91, a: false}, {id: 92, a: false}, {id: 93, a: false}, {id: 94, a: false}, {id: 95, a: false}, {id: 96, a: false}, {id: 97, a: false}, {id: 98, a: false}, {id: 99, a: false}, {id: 100, a: false}, {id: 101, a: false}, {id: 102, a: false}, {id: 103, a: false}, {id: 104, a: false}, {id: 105, a: false}, {id: 106, a: false}, {id: 107, a: false}, {id: 108, a: false}, {id: 109, a: false}, {id: 110, a: false}, {id: 111, a: false}, {id: 112, a: false}, {id: 113, a: false}, {id: 114, a: false}, {id: 115, a: false}, {id: 116, a: false}, {id: 117, a: false}, {id: 118, a: false}, {id: 119, a: false}, {id: 120, a: false}, {id: 121, a: false}, {id: 122, a: false}, {id: 123, a: false}, {id: 124, a: false}, {id: 125, a: false}, {id: 126, a: false}, {id: 127, a: false}, {id: 128, a: false}, {id: 129, a: false}, {id: 130, a: false}, {id: 131, a: false}, {id: 132, a: false}, {id: 133, a: false}, {id: 134, a: false}]
     }
   },
-  beforeCreate(){
-    let local = JSON.parse(localStorage.q5);
-    if(local.length >= 134 && local[133].a) this.$router.push('/result');
-  },
-  mounted() {
+  mounted(){
     if (localStorage.q5){
       this.q5 = JSON.parse(localStorage.q5);
       this.q5.forEach((item, i) => {
         if(item.a){
           this.quizNumber = i + 1;
+          if( this.quizNumber >= this.q5.length ){
+            this.$parent.quizNumber = 'Result';
+          }
         }
-      });
-      if( this.quizNumber >= this.quiz.length){
-        this.quizNumber = this.quiz.length - 1;
-      }
+      })
     }
   },
   methods: {
@@ -184,8 +181,9 @@ export default {
       this.q5 = newArr;
       localStorage.q5 = JSON.stringify(newArr);
       this.quizNumber = this.quizNumber + 1;
-      if( this.quizNumber >= this.q5.length ){
-        this.$router.push('/result');
+      if( this.quizNumber >= this.q5.length ){ 
+        localStorage.sent = false;
+        this.$parent.quizNumber = 'Result';
       }
     }
   }

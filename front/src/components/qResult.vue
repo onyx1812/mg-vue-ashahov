@@ -8,7 +8,7 @@
 <script>
 import Request from '@/services/Request.js'
 export default {
-  name: 'result',
+  name: 'qResult',
   data(){
     return {
       qIde: false,
@@ -201,12 +201,6 @@ export default {
       q5_r3_arr_yes: [1, 6, 9, 11, 14, 20, 22, 26, 28, 31, 33, 40, 41, 43, 44, 46, 49, 54, 55, 64, 68, 71, 74, 76, 79, 80, 85, 86, 88, 91, 92, 93, 95, 100, 101, 104, 111, 115, 119, 127, 131],
       q5_r3_arr_no: [25, 57, 63, 116],
     }
-  },
-  beforeCreate(){
-    if(!localStorage.qIde || !localStorage.q0 || !localStorage.q1 || !localStorage.q2 || !localStorage.q3 || !localStorage.q4 || !localStorage.q5) this.$router.push('/');
-
-    let q5 = JSON.parse(localStorage.q5);
-    if( !q5[q5.length - 1].a ) this.$router.push('/')
   },
   mounted() {
     if(localStorage.qIde) this.qIde = JSON.parse(localStorage.qIde);

@@ -19,8 +19,10 @@ export default {
   background: #fff;
   box-shadow: 0 0 16px rgba(0,0,0, .4);
   .container{
-    display: flex;
-    align-items: center;
+    @media (min-width: 768px) {
+      display: flex;
+      align-items: center; 
+    }
   }
   &__phone{
     white-space: nowrap;
@@ -30,13 +32,21 @@ export default {
     text-decoration: none;
     color: #000;
     margin: 4px 0 4px auto;
+    @media (max-width: 768px) {
+      display: none;
+    } 
   }
   &__logo{
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    height: 100px;
+    justify-content: center;
     text-decoration: none;
+    padding: 5px 0;
+    @media (min-width: 768px) {
+      padding: 0;
+      height: 100px;
+      justify-content: flex-start;
+    }
     img{
       display: block;
       width: 100px;
@@ -44,11 +54,15 @@ export default {
     }
     span{
       font-weight: 500;
-      font-size: 16px;
+      font-size: 14px;
       line-height: 1.25;
       width: 120px;
-      padding-top: 10px;
+      padding-top: 4px;
       color: #000;
+      @media (min-width: 768px) {
+        font-size: 16px;
+        padding-top: 10px;
+      }
     }
   }
 }
