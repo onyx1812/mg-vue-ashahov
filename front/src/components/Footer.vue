@@ -1,7 +1,7 @@
 <template>
   <footer class="main-footer" >
     <div class="container">
-      <small>©2020 Александр Шахов. Все права защищены</small>
+      <small>©2021 Все права защищены</small>
     </div>
   </footer>
 </template>
@@ -15,7 +15,7 @@ export default {
   background: #fff;
   small{
     font-weight: 700;
-    font-size: 11px; 
+    font-size: 11px;
     display: flex;
     align-items: center;
     padding: 10px 0;

@@ -1,14 +1,20 @@
 <template>
   <div class="quesion">
-    <h2>{{ title }}</h2>
-    <h3>{{ subtitle }}</h3>
-    <h4>{{ description }}</h4>
-    <div class="question">
+    <div v-if="!start">
+      <h2>{{ title }}</h2>
+      <h3>{{ subtitle }}</h3>
+      <h4>{{ description }}</h4>
+      <button class="btn" @click="startTest">начать тест</button>
+      <button class="btn" @click="back">вернуться</button>
+    </div>
+    <div class="question" v-else >
       <div class="count"><span>{{this.quizNumber + 1}}</span> из {{ this.quiz.length }}</div>
+      <div class="count count-full">Вы ответили на <span>{{this.quizNumber + 40}}</span> из 612</div>
       <h5>{{ quiz[this.quizNumber].q }}</h5>
       <div class="answers">
         <button class="btn" v-for="answer in quiz[this.quizNumber].a" @click="quizAction" :value="answer" >{{ answer }}</button>
       </div>
+      <button class="link" @click="back">← назад</button>
     </div>
   </div>
 </template>
@@ -17,9 +23,10 @@ export default {
   name: 'q2',
   data(){
     return {
+      start: false,
       quizNumber: 0,
       title: 'Методика № 2',
-      subtitle: 'Личностный опросник NEO PI-R P. Costa и R. McCrae «Большая пятерка» в адаптации В.Е. Орла и И.Г. Сенина',
+      subtitle: '240 вопросов',
       description: 'Прочитайте внимательно каждое утверждение и отметьте тот ответ, который больше всего соответствует Вашему мнению.',
       quiz: [
         {
@@ -1249,6 +1256,22 @@ export default {
       if( this.quizNumber >= this.q2.length ){
         this.$parent.quizNumber = this.$parent.quizNumber + 1;
       }
+    },
+    back(){
+      if(this.quizNumber !== 0){
+        let newArr = this.q2;
+        newArr[--this.quizNumber].a = false;
+        this.q2 = newArr;
+        localStorage.q2 = JSON.stringify(newArr);
+      } else {
+        let q1 = JSON.parse(localStorage.q1);
+        q1[q1.length-1].a = false;
+        localStorage.q1 = JSON.stringify(q1);
+        this.$parent.quizNumber = this.$parent.quizNumber - 1;
+      }
+    },
+    startTest(){
+      this.start = true;
     }
   }
 }

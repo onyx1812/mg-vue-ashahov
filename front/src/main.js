@@ -12,14 +12,14 @@ new Vue({
   store,
   metaInfo() {
     return {
-      title: "Александр Шахов | Опросник",
-      link: [
-        {
-          rel: 'shortcut icon',
-          type: 'image/png',
-          href: require('@/assets/img/favicon.png')
-        }
-      ],
+      title: "Опросник",
+      // link: [
+      //   {
+      //     rel: 'shortcut icon',
+      //     type: 'image/png',
+      //     href: require('@/assets/img/favicon.png')
+      //   }
+      // ],
       meta: [
         {
           name: 'description',

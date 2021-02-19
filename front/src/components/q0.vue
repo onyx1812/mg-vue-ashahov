@@ -13,6 +13,7 @@
       <div class="answers" v-else>
         <button class="btn" v-for="answer in quiz[this.quizNumber].a" @click="quizAction" :value="answer" >{{ answer }}</button>
       </div>
+      <button class="link" @click="back" v-if="this.quizNumber !== 0">← назад</button>
     </div>
   </div>
 </template>
@@ -133,6 +134,12 @@ export default {
       if( this.quizNumber >= this.q0.length ){
         this.$parent.quizNumber = this.$parent.quizNumber + 1;
       }
+    },
+    back(){
+      let newArr = this.q0;
+      newArr[--this.quizNumber].a = false;
+      this.q0 = newArr;
+      localStorage.q0 = JSON.stringify(newArr);
     }
   }
 }
@@ -142,27 +149,20 @@ export default {
   font-size: 26px;
   background: #fff;
   border: 1px solid #000;
-  border-radius: 100px;
-  padding: 14px 60px 14px 30px;
+  padding: 10px;
   text-align: center;
-  margin: 0 -70px 0 0;
   font-weight: 600;
   transition: transform .25s ease;
   color: #000;
   width: 140px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: top;
   @media (max-width: 768px) {
-    height: 49px;
-    top: 3px;
-    position: relative;
-    padding: 10px 60px 10px 15px;
-    z-index: 1;
-  } 
+    height: 48px;
+  }
   & + .btn{
-    z-index: 2;
-    position: relative;
-    &:hover{
-      transform: scale(1.025);
-    }
+    margin: 0;
   }
 }
 </style>

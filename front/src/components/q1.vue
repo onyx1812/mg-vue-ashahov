@@ -1,14 +1,19 @@
 <template>
   <div>
-    <h2>{{ title }}</h2>
-    <h3>{{ subtitle }}</h3>
-    <h4>{{ description }}</h4>
-    <div class="question">
+    <div v-if="!start">
+      <h2>{{ title }}</h2>
+      <h3>{{ subtitle }}</h3>
+      <h4>{{ description }}</h4>
+      <button class="btn" @click="startTest">начать тест</button>
+    </div>
+    <div class="question" v-else >
       <div class="count"><span>{{this.quizNumber + 1}}</span> из {{ this.quiz.length }}</div>
+      <div class="count count-full">Вы ответили на <span>{{this.quizNumber}}</span> из 612</div>
       <h5>{{ quiz[this.quizNumber].q }}</h5>
       <div class="answers">
         <button class="btn" v-for="answer in quiz[this.quizNumber].a" @click="quizAction" :value="answer" >{{ answer }}</button>
       </div>
+      <button class="link" @click="back">← назад</button>
     </div>
   </div>
 </template>
@@ -17,10 +22,11 @@ export default {
   name: 'q11',
   data(){
     return {
+      start: false,
       quizNumber: 0,
-      title: 'Методика №1',
-      subtitle: 'Методика диагностики склонности к формированию ошибочных установок разного уровня А.А. Шахова и С.А. Башкатова',
-      description: 'Прочитайте внимательно каждое утверждение и отметьте тот ответ в столбике, который больше всего соответствует Вашему мнению.',
+      title: 'Тест №1',
+      subtitle: 'всего 40 вопросов',
+      description: 'Прочитайте внимательно каждое утверждение и отметьте тот ответ, который больше всего соответствует Вашему мнению.',
       quiz: [
         {
           id: 1,
@@ -228,6 +234,7 @@ export default {
   },
   mounted() {
     if (localStorage.q1){
+      this.start = true;
       this.q1 = JSON.parse(localStorage.q1);
       this.q1.forEach((item, i) => {
         if(item.a){
@@ -249,6 +256,22 @@ export default {
       if( this.quizNumber >= this.q1.length ){
         this.$parent.quizNumber = this.$parent.quizNumber + 1;
       }
+    },
+    back(){
+      if(this.quizNumber !== 0){
+        let newArr = this.q1;
+        newArr[--this.quizNumber].a = false;
+        this.q1 = newArr;
+        localStorage.q1 = JSON.stringify(newArr);
+      } else {
+        let q0 = JSON.parse(localStorage.q0);
+        q0[q0.length-1].a = false;
+        localStorage.q0 = JSON.stringify(q0);
+        this.$parent.quizNumber = this.$parent.quizNumber - 1;
+      }
+    },
+    startTest(){
+      this.start = true;
     }
   }
 }

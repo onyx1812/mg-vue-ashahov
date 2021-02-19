@@ -5,10 +5,12 @@
     <h4>{{ description }}</h4>
     <div class="question">
       <div class="count"><span>{{this.quizNumber + 1}}</span> из {{ this.quiz.length }}</div>
+      <div class="count count-full">Вы ответили на <span>{{this.quizNumber + 40 + 240}}</span> из 612</div>
       <h5>{{ quiz[this.quizNumber].q }}</h5>
       <div class="answers">
         <button class="btn" v-for="answer in quiz[this.quizNumber].a" @click="quizAction" :value="answer" >{{ answer }}</button>
       </div>
+      <button class="link" @click="back">← назад</button>
     </div>
   </div>
 </template>
@@ -162,6 +164,19 @@ export default {
       this.quizNumber = this.quizNumber + 1;
       if( this.quizNumber >= this.q3.length ){
         this.$parent.quizNumber = this.$parent.quizNumber + 1;
+      }
+    },
+    back(){
+      if(this.quizNumber !== 0){
+        let newArr = this.q3;
+        newArr[--this.quizNumber].a = false;
+        this.q3 = newArr;
+        localStorage.q3 = JSON.stringify(newArr);
+      } else {
+        let q2 = JSON.parse(localStorage.q2);
+        q2[q2.length-1].a = false;
+        localStorage.q2 = JSON.stringify(q2);
+        this.$parent.quizNumber = this.$parent.quizNumber - 1;
       }
     }
   }

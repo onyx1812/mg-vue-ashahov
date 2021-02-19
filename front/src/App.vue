@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header/>
+    <!-- <Header/> -->
     <main class="main" ref="main">
       <router-view/>
     </main>
@@ -8,12 +8,12 @@
   </div>
 </template>
 <script>
-import Header from './components/Header.vue'
+// import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 export default {
   name: 'app',
   components: {
-    Header,
+    // Header,
     Footer
   }
 }
@@ -29,11 +29,11 @@ export default {
 }
 .main{
   padding: 50px 0;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 34px);
   display: flex;
   align-items: center;
   @media (min-width: 768px) {
-    min-height: calc(100vh - 160px);
+    min-height: calc(100vh - 60px);
   }
 }
 </style>
