@@ -4,8 +4,14 @@
       <h2>{{ title }}</h2>
       <h3>{{ subtitle }}</h3>
       <h4>{{ description }}</h4>
-      <button class="btn" @click="startTest">начать тест</button>
-      <button class="btn" @click="back">вернуться</button>
+      <button class="btn" @click="startTest">Начать тест</button>
+      <button class="btn btn-back" @click="back">Назад</button>
+    </div>
+    <div v-else-if="start === 'done'">
+      <h2>{{ title }} окончен!</h2>
+      <h3>Благодарим Вас! Вы очень помогли!</h3>
+      <h4>Результаты теста будут высланы Вам на электронную почту после прохождения всей методики. Еще 3 теста и вы окажете бесценную услугу человечеству!</h4>
+      <button class="btn" @click="done">Продолжить</button>
     </div>
     <div class="question" v-else >
       <div class="count"><span>{{this.quizNumber + 1}}</span> из {{ this.quiz.length }}</div>
@@ -25,7 +31,7 @@ export default {
     return {
       start: false,
       quizNumber: 0,
-      title: 'Методика № 2',
+      title: 'Тест № 2',
       subtitle: '240 вопросов',
       description: 'Прочитайте внимательно каждое утверждение и отметьте тот ответ, который больше всего соответствует Вашему мнению.',
       quiz: [
@@ -1254,7 +1260,7 @@ export default {
       localStorage.q2 = JSON.stringify(newArr);
       this.quizNumber = this.quizNumber + 1;
       if( this.quizNumber >= this.q2.length ){
-        this.$parent.quizNumber = this.$parent.quizNumber + 1;
+        this.start = 'done';
       }
     },
     back(){
@@ -1269,6 +1275,9 @@ export default {
         localStorage.q1 = JSON.stringify(q1);
         this.$parent.quizNumber = this.$parent.quizNumber - 1;
       }
+    },
+    done(){
+      this.$parent.quizNumber = this.$parent.quizNumber + 1;
     },
     startTest(){
       this.start = true;

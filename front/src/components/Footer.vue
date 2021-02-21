@@ -13,11 +13,13 @@ export default {
 <style lang="scss" scoped>
 .main-footer{
   background: #fff;
+  text-align: center;
   small{
     font-weight: 700;
     font-size: 11px;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 10px 0;
     @media (min-width: 768px) {
       padding: 0;

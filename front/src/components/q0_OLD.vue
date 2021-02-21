@@ -3,23 +3,18 @@
     <h2>{{ title }}</h2>
     <h3>{{ subtitle }}</h3>
     <h4>{{ description }}</h4>
-    <div class="question" v-for="(question, i) in quiz" :class="'question-'+i">
-      <h5 v-html="question.q"></h5>
-      <div class="answers" v-if="question.id === 2">
-        <input type="number" v-model.number="q0[i].a" >
+    <div class="question">
+      <div class="count"><span>{{this.quizNumber + 1}}</span> из {{ this.quiz.length }}</div>
+      <h5 v-html="quiz[this.quizNumber].q"></h5>
+      <div class="answers" v-if="this.quizNumber === 1">
+        <input type="number" v-model.number="age" >
+        <button class="btn" @click="quizAction" :value="this.age" >далее</button>
       </div>
-      <div class="answers" v-else >
-        <div v-for="(answer, l) in question.a" class="answer">
-          <input type="radio" v-model="q0[i].a" :id="`answer_${i}_${l}`" :value="answer" >
-          <label :for="`answer_${i}_${l}`">{{ answer }}</label>
-        </div>
+      <div class="answers" v-else>
+        <button class="btn" v-for="answer in quiz[this.quizNumber].a" @click="quizAction" :value="answer" >{{ answer }}</button>
       </div>
+      <button class="link" @click="back" v-if="this.quizNumber !== 0">← назад</button>
     </div>
-    <div v-if="q0_err" class="err">
-      <h5>Вы не выбрали:</h5>
-      <p v-for="id in q0_err_arr" v-html="quiz[id-1].q"></p>
-    </div>
-    <button @click="quizAction" class="btn">Продолжить</button>
   </div>
 </template>
 <script>
@@ -36,7 +31,7 @@ export default {
         {
           id: 1,
           q: 'Пол',
-          a: ['Мужской', 'Женский'],
+          a: ['Мужской', 'Женский']
         },
         {
           id: 2,
@@ -101,7 +96,7 @@ export default {
       ],
       q0: [
         {id: 1, a: false },
-        {id: 2, a: 20 },
+        {id: 2, a: false },
         {id: 3, a: false },
         {id: 4, a: false },
         {id: 5, a: false },
@@ -113,9 +108,7 @@ export default {
         {id: 11, a: false },
         {id: 12, a: false },
         {id: 13, a: false }
-      ],
-      q0_err: false,
-      q0_err_arr: []
+      ]
     }
   },
   mounted() {
@@ -133,19 +126,20 @@ export default {
   },
   methods: {
     quizAction(e) {
-      this.q0_err = false;
-      let newArr = this.q0, err_arr = [];
-      newArr.forEach(answer => {
-        if(!answer.a){
-          this.q0_err = true;
-          err_arr.push(answer.id);
-        }
-      });
-      this.q0_err_arr = err_arr;
-      if(!this.q0_err){
-        localStorage.q0 = JSON.stringify(newArr);
-        this.$parent.quizNumber = 1;
+      let newArr = this.q0;
+      newArr[this.quizNumber].a = e.target.value;
+      this.q0 = newArr;
+      localStorage.q0 = JSON.stringify(newArr);
+      this.quizNumber = this.quizNumber + 1;
+      if( this.quizNumber >= this.q0.length ){
+        this.$parent.quizNumber = this.$parent.quizNumber + 1;
       }
+    },
+    back(){
+      let newArr = this.q0;
+      newArr[--this.quizNumber].a = false;
+      this.q0 = newArr;
+      localStorage.q0 = JSON.stringify(newArr);
     }
   }
 }
@@ -169,68 +163,6 @@ export default {
   }
   & + .btn{
     margin: 0;
-  }
-}
-[type="radio"]{
-  display: none;
-  & + label{
-    display: block;
-    padding: 5px 10px;
-    border: 1px solid rgba(0,0,0, .4);
-    font-size: 15px;
-    cursor: pointer;
-    &:hover{
-      border-color: #38a3fc;
-      background: rgba(#38a3fc, .4);
-      color: #fff;
-    }
-  }
-  &:checked{
-    & + label{
-      border-color: #38a3fc;
-      background: #38a3fc;
-      color: #fff;
-    }
-  }
-}
-.question{
-  display: block;
-  padding: 30px 15px;
-  border-bottom: 1px solid #000;
-  &-12{
-    border-bottom: none; 
-    margin-bottom: 30px;
-  }
-}
-.answers{
-  display: block;
-  text-align: left;
-}
-.answer{
-  display: inline-block;
-  &:not(:first-child){
-    margin-left: 15px;
-  }
-}
-h5{
-  font-size: 18px;
-  text-align: left;
-  margin-bottom: 10px;
-  min-height: 0px;
-  display: block;
-  span{ 
-    font-size: 14px;
-    padding-top: 5px;
-  }
-}
-.err{
-  text-align: left;
-  padding: 15px 0;
-  font-size: 12px;
-  p{
-    color: red;
-    border-bottom: 1px solid red;
-    padding: 4px 10px;
   }
 }
 </style>

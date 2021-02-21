@@ -1,9 +1,19 @@
 <template>
   <div class="quesion">
-    <h2>{{ title }}</h2>
-    <h3>{{ subtitle }}</h3>
-    <h4>{{ description }}</h4>
-    <div class="question">
+    <div v-if="!start">
+      <h2>{{ title }}</h2>
+      <h3>{{ subtitle }}</h3>
+      <h4>{{ description }}</h4>
+      <button class="btn" @click="startTest">Начать тест</button>
+      <button class="btn btn-back" @click="back">Назад</button>
+    </div>
+    <div v-else-if="start === 'done'">
+      <h2>{{ title }} окончен!</h2>
+      <h3>Благодарим Вас! Вы очень помогли!</h3>
+      <h4>Результаты теста будут высланы Вам на электронную почту после прохождения всей методики. Еще 2 теста и вы окажете бесценную услугу человечеству!</h4>
+      <button class="btn" @click="done">Продолжить</button>
+    </div>
+    <div class="question" v-else >
       <div class="count"><span>{{this.quizNumber + 1}}</span> из {{ this.quiz.length }}</div>
       <div class="count count-full">Вы ответили на <span>{{this.quizNumber + 40 + 240}}</span> из 612</div>
       <h5>{{ quiz[this.quizNumber].q }}</h5>
@@ -19,10 +29,11 @@ export default {
   name: 'q3',
   data(){
     return {
+      start: false,
       quizNumber: 0,
-      title: 'Методика № 3',
-      subtitle: 'Фрайбургский личностный опросник FPI-B в адаптации А.А. Крылова и Т.И. Рогинского',
-      description: 'Прочитайте внимательно каждое утверждение и отметьте тот ответ в столбике, который больше всего соответствует Вашему мнению.',
+      title: 'Тест № 3',
+      subtitle: '114 вопросов',
+      description: 'Прочитайте внимательно каждое утверждение и отметьте тот ответ, который больше всего соответствует Вашему мнению.',
       quiz: [
         {id: 1, q: 'Я внимательно прочел инструкцию и готов откровенно ответить на все вопросы анкеты', a: ['Да', 'Нет']},
         {id: 2, q: 'По вечерам я предпочитаю развлекаться в веселой компании (гости, кафе и т.п)', a: ['Да', 'Нет']},
@@ -163,7 +174,7 @@ export default {
       localStorage.q3 = JSON.stringify(newArr);
       this.quizNumber = this.quizNumber + 1;
       if( this.quizNumber >= this.q3.length ){
-        this.$parent.quizNumber = this.$parent.quizNumber + 1;
+        this.start = 'done';
       }
     },
     back(){
@@ -178,6 +189,12 @@ export default {
         localStorage.q2 = JSON.stringify(q2);
         this.$parent.quizNumber = this.$parent.quizNumber - 1;
       }
+    },
+    done(){
+      this.$parent.quizNumber = this.$parent.quizNumber + 1;
+    },
+    startTest(){
+      this.start = true;
     }
   }
 }

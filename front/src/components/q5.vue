@@ -1,9 +1,13 @@
 <template>
-  <div class="quesion" v-if="loading">
-    <h2>{{ title }}</h2>
-    <h3>{{ subtitle }}</h3>
-    <h4>{{ description }}</h4>
-    <div class="question">
+  <div class="quesion">
+    <div v-if="!start">
+      <h2>{{ title }}</h2>
+      <h3>{{ subtitle }}</h3>
+      <h4>{{ description }}</h4>
+      <button class="btn" @click="startTest">Начать тест</button>
+      <button class="btn btn-back" @click="back">Назад</button>
+    </div>
+    <div class="question" v-else >
       <div class="count"><span>{{this.quizNumber + 1}}</span> из {{ this.quiz.length }}</div>
       <div class="count count-full">Вы ответили на <span>{{this.quizNumber + 40 + 240 + 84}}</span> из 612</div>
       <h5>{{ quiz[this.quizNumber].q }}</h5>
@@ -19,11 +23,11 @@ export default {
   name: 'q5',
   data(){
     return {
-      loading: true,
+      start: false,
       quizNumber: 0,
-      title: 'Методика № 5',
-      subtitle: 'Опросник темперамента Я. Стреляу в адаптации Н.Н. Даниловой и А.Г. Шмелева',
-      description: 'Ответьте на вопросы поочередно, не возвращаясь к предыдущим ответам.',
+      title: 'Тест № 5',
+      subtitle: '134 вопроса',
+      description: 'Прочитайте внимательно каждое утверждение и отметьте тот ответ, который больше всего соответствует Вашему мнению.',
       quiz: [
         {id: 1, q: 'Относите ли вы себя к людям, легко устанавливающим товарищеские контакты?', a: ['Да', 'Нет', 'Не знаю']},
         {id: 2, q: 'Способны ли вы воздержаться от того или иного действия до момента, пока не получите соответствующего распоряжения?', a: ['Да', 'Нет', 'Не знаю']},
@@ -200,6 +204,9 @@ export default {
         localStorage.q4 = JSON.stringify(q4);
         this.$parent.quizNumber = this.$parent.quizNumber - 1;
       }
+    },
+    startTest(){
+      this.start = true;
     }
   }
 }
