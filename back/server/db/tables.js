@@ -12,8 +12,7 @@ module.exports = (db, callback) => {
             q2 TEXT,
             q3 TEXT,
             q4 TEXT,
-            q5 TEXT,
-            quiz TEXT
+            q5 TEXT
             `
     }
   ]

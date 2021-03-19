@@ -17,7 +17,7 @@ const
               Connect DB
 -------------------------------------------*/
 const mysql = require('mysql')
-const db_conf = require('./db/dev.js')
+const db_conf = require('./db/live.js')
 const db = mysql.createConnection(db_conf)
 db.connect(err => {
   if(err){ throw err }
@@ -60,8 +60,8 @@ app.get('/', (req, res) => {
 -------------------------------------------*/
 app.post('/add', (req, res) => {
   connector(`
-    INSERT INTO questionnaire(qIde, q0, q1, q2, q3, q4, q5, quiz)
-    VALUES('${JSON.stringify(req.body.params.qIde)}', '${JSON.stringify(req.body.params.q0)}', '${JSON.stringify(req.body.params.q1)}', '${JSON.stringify(req.body.params.q2)}', '${JSON.stringify(req.body.params.q3)}', '${JSON.stringify(req.body.params.q4)}', '${JSON.stringify(req.body.params.q5)}', '${JSON.stringify(req.body.params.quiz)}')
+    INSERT INTO questionnaire(qIde, q0, q1, q2, q3, q4, q5)
+    VALUES('${JSON.stringify(req.body.params.qIde)}', '${JSON.stringify(req.body.params.q0)}', '${JSON.stringify(req.body.params.q1)}', '${JSON.stringify(req.body.params.q2)}', '${JSON.stringify(req.body.params.q3)}', '${JSON.stringify(req.body.params.q4)}', '${JSON.stringify(req.body.params.q5)}')
   `)
     .then(result => {
       res.send({

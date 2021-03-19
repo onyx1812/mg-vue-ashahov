@@ -1,0 +1,147 @@
+@import 'base/all';
+
+h2{
+  font-size: 34px;
+  margin-bottom: 30px;
+  @media (min-width: 768px) {
+    font-size: 50px;
+  }
+}
+h3{
+  font-size: 13px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
+}
+h4{
+  font-size: 12px;
+  margin-bottom: 30px;
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
+}
+h5{
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (min-width: 768px) {
+    font-size: 24px;
+    min-height: 200px;
+  }
+  span{
+    font-size: 15px;
+    font-weight: 400;
+    display: block;
+    padding-top: 15px;
+  }
+}
+
+.answers{
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (max-width: 768px) {
+    .btn{
+      margin-top: 7.5px;
+      margin-bottom: 7.5px;
+    }
+  }
+}
+
+.btn{
+  font-size: 16px;
+  background: #38a3fc;
+  border: none;
+  border-radius: 0;
+  padding: 15px 30px;
+  margin: 0 15px;
+  font-weight: 600;
+  transition: transform .25s ease;
+  color: #fff;
+  user-select: none;
+  @media (min-width: 768px) {
+    font-size: 20px;
+    padding: 15px 45px;
+  }
+  &:hover{
+    background: #008bff;
+  }
+  &:active{
+    background: #008bff;
+  }
+  &-back{
+    background-color: #ccc;
+    &:hover{
+      background: #999;
+    }
+    &:active{
+      background: #999;
+    }
+  }
+}
+
+.question{
+  user-select: none;
+  position: relative;
+  padding: 30px 15px 15px 15px;
+  display: inline-block;
+  background: #fff;
+  // box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.22394);
+  border-radius: 0;
+  max-width: 100%;
+  width: 100%;
+  @media (min-width: 768px) {
+    padding: 90px 60px 60px 60px;
+  }
+}
+
+.count {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  font-size: 11px;
+  font-weight: 400;
+  @media (min-width: 768px) {
+    right: 15px;
+    top: 15px;
+  }
+  span{
+    color: #38a3fc;
+    font-size: 12px;
+    font-weight: 700;
+    @media (min-width: 768px) {
+      font-size: 15px;
+    }
+  }
+  &-full{
+    top: 100%;
+    right: auto;
+    left: 50%;
+    transform: translate(-50%, 5px);
+  }
+}
+
+.link{
+  color: #38a3fc;
+  background: none;
+  border: none;
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  @media (min-width: 768px) {
+    font-size: 15px;
+    left: 15px;
+    top: 15px;
+  }
+}

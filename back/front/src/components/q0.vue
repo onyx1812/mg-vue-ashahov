@@ -1,0 +1,236 @@
+<template>
+  <div>
+    <h2>{{ title }}</h2>
+    <h3>{{ subtitle }}</h3>
+    <h4>{{ description }}</h4>
+    <div class="question" v-for="(question, i) in quiz" :class="'question-'+i">
+      <h5 v-html="question.q"></h5>
+      <div class="answers" v-if="question.id === 2">
+        <input type="number" v-model.number="q0[i].a" >
+      </div>
+      <div class="answers" v-else >
+        <div v-for="(answer, l) in question.a" class="answer">
+          <input type="radio" v-model="q0[i].a" :id="`answer_${i}_${l}`" :value="answer" >
+          <label :for="`answer_${i}_${l}`">{{ answer }}</label>
+        </div>
+      </div>
+    </div>
+    <div v-if="q0_err" class="err">
+      <h5>Вы не выбрали:</h5>
+      <p v-for="id in q0_err_arr" v-html="quiz[id-1].q"></p>
+    </div>
+    <button @click="quizAction" class="btn">Продолжить</button>
+  </div>
+</template>
+<script>
+export default {
+  name: 'q0',
+  data(){
+    return {
+      age: 20,
+      title: 'Анкета',
+      subtitle: 'Просим Вас ответить на вопоросы методик, посвященных изучению индивидуальных качеств человека. Не размышляйте долго над выбором ответа. Результаты исследования будут обрабатываться в обобщенном виде.',
+      description: 'Укажите, пожалуйста, следующие данные о себе:',
+      quizNumber: 0,
+      quiz: [
+        {
+          id: 1,
+          q: 'Пол',
+          a: ['Мужской', 'Женский'],
+        },
+        {
+          id: 2,
+          q: 'Возраст',
+          a: Number
+        },
+        {
+          id: 3,
+          q: 'Семейное положение',
+          a: ['женат/замужем', 'разведен/а ', 'холост/не замужем']
+        },
+        {
+          id: 4,
+          q: 'Образование',
+          a: ['среднее', 'средне-специальное', 'высшее']
+        },
+        {
+          id: 5,
+          q: 'Работаете ли Вы?',
+          a: ['да', 'нет', 'частичная занятость']
+        },
+        {
+          id: 6,
+          q: 'Как оцениваете свой уровень доходов?',
+          a: ['низкий', 'средний', 'высокий']
+        },
+        {
+          id: 7,
+          q: 'Оцените уровень своей образованности',
+          a: ['низкий', 'средний', 'высокий']
+        },
+        {
+          id: 8,
+          q: 'Оцените насколько часто Вы совершаете ошибки в своей жизни в целом?',
+          a: ['редко', 'средне', 'часто']
+        },
+        {
+          id: 9,
+          q: 'Оцените насколько часто Вы совершаете ошибки в своей повседневной, привычной деятельности?',
+          a: ['редко', 'средне', 'часто']
+        },
+        {
+          id: 10,
+          q: `Как часто Вы совершаете ошибки «на автомате»? <br> <span>Например: <br> ¨повернули в привычную сторону, когда нужно в другое место или проехали нужный поворот, или свою остановку; <br> ¨нажали не ту кнопку в лифте, поменяли буквы местами при наборе текста или набрали одно слово дважды; <br> ¨вдруг потеряли вещь, которую только что держали в руках.</span>`,
+          a: ['редко', 'средне', 'часто']
+        },
+        {
+          id: 11,
+          q: `Как часто Вы совершаете ошибки в результате «мысленных» операций? <br> <span>Например: <br> ¨назвали мужа именем своего брата или жену именем своей сестры; <br> ¨слово «вертится на языке», но не можете его вспомнить; <br> ¨у человека знакомое лицо, но не можете назвать его по  имени; <br> ¨забыли очередность цифр в номере телефона, который до этого прекрасно помнили.</span>`,
+          a: ['редко', 'средне', 'часто']
+        },
+        {
+          id: 12,
+          q: `Оцените насколько часто Вам бывает сложно достичь цели по следующим причинам: <br> <span>¨неправильно оценили реальную ситуацию, в которой находились; <br> ¨неправильно оценили свои возможности.</span>`,
+          a: ['редко', 'средне', 'часто']
+        },
+        {
+          id: 13,
+          q: `Оцените, как Вы относитесь к людям, считающим не обязательным следовать нормам морали? <br> <span>Например, допускающим: <br> ¨распущенность; <br> ¨обман; <br> ¨интриги; <br> ¨хищения; <br> ¨ коррупцию и др.</span>`,
+          a: ['с осуждением', 'нейтрально', 'считаю допустимым']
+        }
+      ],
+      q0: [
+        {id: 1, a: false },
+        {id: 2, a: 20 },
+        {id: 3, a: false },
+        {id: 4, a: false },
+        {id: 5, a: false },
+        {id: 6, a: false },
+        {id: 7, a: false },
+        {id: 8, a: false },
+        {id: 9, a: false },
+        {id: 10, a: false },
+        {id: 11, a: false },
+        {id: 12, a: false },
+        {id: 13, a: false }
+      ],
+      q0_err: false,
+      q0_err_arr: []
+    }
+  },
+  mounted() {
+    if (localStorage.q0){
+      this.q0 = JSON.parse(localStorage.q0);
+      this.q0.forEach((item, i) => {
+        if(item.a){
+          this.quizNumber = i + 1;
+          if( this.quizNumber >= this.q0.length ){
+            this.$parent.quizNumber = this.$parent.quizNumber + 1;
+          }
+        }
+      });
+    }
+  },
+  methods: {
+    quizAction(e) {
+      this.q0_err = false;
+      let newArr = this.q0, err_arr = [];
+      newArr.forEach(answer => {
+        if(!answer.a){
+          this.q0_err = true;
+          err_arr.push(answer.id);
+        }
+      });
+      this.q0_err_arr = err_arr;
+      if(!this.q0_err){
+        localStorage.q0 = JSON.stringify(newArr);
+        this.$parent.quizNumber = 1;
+      }
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+[type="number"]{
+  font-size: 26px;
+  background: #fff;
+  border: 1px solid #000;
+  padding: 10px;
+  text-align: center;
+  font-weight: 600;
+  transition: transform .25s ease;
+  color: #000;
+  width: 140px;
+  height: 61px;
+  display: inline-block;
+  vertical-align: top;
+  @media (max-width: 768px) {
+    height: 48px;
+  }
+  & + .btn{
+    margin: 0;
+  }
+}
+[type="radio"]{
+  display: none;
+  & + label{
+    display: block;
+    padding: 5px 10px;
+    border: 1px solid rgba(0,0,0, .4);
+    font-size: 15px;
+    cursor: pointer;
+    &:hover{
+      border-color: #38a3fc;
+      background: rgba(#38a3fc, .4);
+      color: #fff;
+    }
+  }
+  &:checked{
+    & + label{
+      border-color: #38a3fc;
+      background: #38a3fc;
+      color: #fff;
+    }
+  }
+}
+.question{
+  display: block;
+  padding: 30px 15px;
+  border-bottom: 1px solid #000;
+  &-12{
+    border-bottom: none; 
+    margin-bottom: 30px;
+  }
+}
+.answers{
+  display: block;
+  text-align: left;
+}
+.answer{
+  display: inline-block;
+  &:not(:first-child){
+    margin-left: 15px;
+  }
+}
+h5{
+  font-size: 18px;
+  text-align: left;
+  margin-bottom: 10px;
+  min-height: 0px;
+  display: block;
+  span{ 
+    font-size: 14px;
+    padding-top: 5px;
+  }
+}
+.err{
+  text-align: left;
+  padding: 15px 0;
+  font-size: 12px;
+  p{
+    color: red;
+    border-bottom: 1px solid red;
+    padding: 4px 10px;
+  }
+}
+</style>

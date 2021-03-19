@@ -883,15 +883,7 @@ export default {
           title: 'Подвижность нервных процессов',
           res: this.q5_r3_result
         }
-      ],
-      quiz: {
-        q0: this.q0,
-        q1: this.q1,
-        q2: this.q2,
-        q3: this.q3,
-        q4: this.q4,
-        q5: this.q5
-      }
+      ]
     }
 
     let sent = JSON.parse(localStorage.sent);
@@ -900,9 +892,6 @@ export default {
         .then(res => {
           localStorage.sent = true;
           console.log('sent true');
-          setTimeout(()=>{
-            window.location.href = "https://course.ashahov.ru/tes_final";
-          }, 1000);
         })
         .catch(err => {
           if(res.status === "succeeded") localStorage.sent = false;

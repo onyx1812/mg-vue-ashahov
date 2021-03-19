@@ -60,8 +60,8 @@ app.get('/', (req, res) => {
 -------------------------------------------*/
 app.post('/add', (req, res) => {
   connector(`
-    INSERT INTO questionnaire(qIde, q0, q1, q2, q3, q4, q5, quiz)
-    VALUES('${JSON.stringify(req.body.params.qIde)}', '${JSON.stringify(req.body.params.q0)}', '${JSON.stringify(req.body.params.q1)}', '${JSON.stringify(req.body.params.q2)}', '${JSON.stringify(req.body.params.q3)}', '${JSON.stringify(req.body.params.q4)}', '${JSON.stringify(req.body.params.q5)}', '${JSON.stringify(req.body.params.quiz)}')
+    INSERT INTO questionnaire(qIde, q0, q1, q2, q3, q4, q5)
+    VALUES('${JSON.stringify(req.body.params.qIde)}', '${JSON.stringify(req.body.params.q0)}', '${JSON.stringify(req.body.params.q1)}', '${JSON.stringify(req.body.params.q2)}', '${JSON.stringify(req.body.params.q3)}', '${JSON.stringify(req.body.params.q4)}', '${JSON.stringify(req.body.params.q5)}')
   `)
     .then(result => {
       res.send({
