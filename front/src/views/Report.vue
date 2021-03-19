@@ -1249,14 +1249,14 @@ export default {
           return this.filteredData;
         })
           .then(users => {
-            let q0_arr = [], q1_arr = [], q2_arr = [], q3_arr = [], q4_arr = [], q5_arr = [], quiz_q1_arr = [], quiz_q2_arr = [], quiz_q3_arr = [], quiz_q4_arr = [], quiz_q5_arr = [];
+            let q0_arr = [], q1_arr = [], q2_arr = [], q3_arr = [], q4_arr = [], q5_arr = [];
 
             users.forEach(user => {
               let
                 qIde = JSON.parse(user.qIde),
                 email = qIde.email;
 
-              let q0_obj = {}, q1_obj = {}, q2_obj = {}, q3_obj = {}, q4_obj = {}, q5_obj = {}, quiz_q1_obj = {}, quiz_q2_obj = {}, quiz_q3_obj = {}, quiz_q4_obj = {}, quiz_q5_obj = {};
+              let q0_obj = {}, q1_obj = {}, q2_obj = {}, q3_obj = {}, q4_obj = {}, q5_obj = {};
 
               let
                 q0 = JSON.parse(user.q0),
@@ -1273,11 +1273,6 @@ export default {
               q3_obj['Email'] = email;
               q4_obj['Email'] = email;
               q5_obj['Email'] = email;
-              quiz_q1_obj['Email'] = email;
-              quiz_q2_obj['Email'] = email;
-              quiz_q3_obj['Email'] = email;
-              quiz_q4_obj['Email'] = email;
-              quiz_q5_obj['Email'] = email;
 
               q0.forEach((item, i) => {
                 q0_obj[this.filters[i].label] = item.a;
@@ -1299,19 +1294,19 @@ export default {
               });
 
               quiz.q1.forEach((item, i) => {
-                quiz_q1_obj['Методика_1 Вопрос_'+item.id] = item.a;
+                q1_obj['Вопрос #'+item.id] = item.a;
               });
               quiz.q2.forEach((item, i) => {
-                quiz_q2_obj['Методика_2 Вопрос_'+item.id] = item.a;
+                q2_obj['Вопрос #'+item.id] = item.a;
               });
               quiz.q3.forEach((item, i) => {
-                quiz_q3_obj['Методика_3 Вопрос_'+item.id] = item.a;
+                q3_obj['Вопрос #'+item.id] = item.a;
               });
               quiz.q4.forEach((item, i) => {
-                quiz_q4_obj['Методика_4 Вопрос_'+item.id] = item.a;
+                q4_obj['Вопрос #'+item.id] = item.a;
               });
               quiz.q5.forEach((item, i) => {
-                quiz_q5_obj['Методика_5 Вопрос_'+item.id] = item.a;
+                q5_obj['Вопрос #'+item.id] = item.a;
               });
 
               q0_arr.push(q0_obj);
@@ -1321,12 +1316,6 @@ export default {
               q4_arr.push(q4_obj);
               q5_arr.push(q5_obj);
 
-              quiz_q1_arr.push(quiz_q1_obj);
-              quiz_q2_arr.push(quiz_q2_obj);
-              quiz_q3_arr.push(quiz_q3_obj);
-              quiz_q4_arr.push(quiz_q4_obj);
-              quiz_q5_arr.push(quiz_q5_obj);
-
             })
 
             this.Export = {
@@ -1335,12 +1324,7 @@ export default {
               methods2: q2_arr,
               methods3: q3_arr,
               methods4: q4_arr,
-              methods5: q5_arr,
-              quiz1: quiz_q1_arr,
-              quiz2: quiz_q2_arr,
-              quiz3: quiz_q3_arr,
-              quiz4: quiz_q4_arr,
-              quiz5: quiz_q5_arr
+              methods5: q5_arr
             }
 
           })
@@ -1358,11 +1342,6 @@ export default {
             methods3WS = XLSX.utils.json_to_sheet(this.Export.methods3),
             methods4WS = XLSX.utils.json_to_sheet(this.Export.methods4),
             methods5WS = XLSX.utils.json_to_sheet(this.Export.methods5),
-            quiz1WS = XLSX.utils.json_to_sheet(this.Export.quiz1),
-            quiz2WS = XLSX.utils.json_to_sheet(this.Export.quiz2),
-            quiz3WS = XLSX.utils.json_to_sheet(this.Export.quiz3),
-            quiz4WS = XLSX.utils.json_to_sheet(this.Export.quiz4),
-            quiz5WS = XLSX.utils.json_to_sheet(this.Export.quiz5),
             wb = XLSX.utils.book_new()
 
       XLSX.utils.book_append_sheet(wb, anketaWS, 'Анкета')
@@ -1371,11 +1350,6 @@ export default {
       XLSX.utils.book_append_sheet(wb, methods3WS, 'Методика 3')
       XLSX.utils.book_append_sheet(wb, methods4WS, 'Методика 4')
       XLSX.utils.book_append_sheet(wb, methods5WS, 'Методика 5')
-      XLSX.utils.book_append_sheet(wb, quiz1WS, 'Тест 1')
-      XLSX.utils.book_append_sheet(wb, quiz2WS, 'Тест 2')
-      XLSX.utils.book_append_sheet(wb, quiz3WS, 'Тест 3')
-      XLSX.utils.book_append_sheet(wb, quiz4WS, 'Тест 4')
-      XLSX.utils.book_append_sheet(wb, quiz5WS, 'Тест 5')
 
       XLSX.writeFile(wb, 'book.xlsx')
     },
@@ -1384,8 +1358,7 @@ export default {
       /*---------------------*/
       Request.get()
         .then(result => {
-          console.log(result);
-          let q0_arr = [], q1_arr = [], q2_arr = [], q3_arr = [], q4_arr = [], q5_arr = [], quiz_q1_arr = [], quiz_q2_arr = [], quiz_q3_arr = [], quiz_q4_arr = [], quiz_q5_arr = [];
+          let q0_arr = [], q1_arr = [], q2_arr = [], q3_arr = [], q4_arr = [], q5_arr = [];
 
           result.forEach(user => {
             let
@@ -1394,7 +1367,7 @@ export default {
 
             if(email == this.emailInput){
 
-              let q0_obj = {}, q1_obj = {}, q2_obj = {}, q3_obj = {}, q4_obj = {}, q5_obj = {}, quiz_q1_obj = {}, quiz_q2_obj = {}, quiz_q3_obj = {}, quiz_q4_obj = {}, quiz_q5_obj = {};
+              let q0_obj = {}, q1_obj = {}, q2_obj = {}, q3_obj = {}, q4_obj = {}, q5_obj = {};
 
               let
                 q0 = JSON.parse(user.q0),
@@ -1411,11 +1384,6 @@ export default {
               q3_obj['Email'] = email;
               q4_obj['Email'] = email;
               q5_obj['Email'] = email;
-              quiz_q1_obj['Email'] = email;
-              quiz_q2_obj['Email'] = email;
-              quiz_q3_obj['Email'] = email;
-              quiz_q4_obj['Email'] = email;
-              quiz_q5_obj['Email'] = email;
 
               q0.forEach((item, i) => {
                 q0_obj[this.filters[i].label] = item.a;
@@ -1437,19 +1405,19 @@ export default {
               });
 
               quiz.q1.forEach((item, i) => {
-                quiz_q1_obj['Методика_1 Вопрос_'+item.id] = item.a;
+                q1_obj['Вопрос #'+item.id] = item.a;
               });
               quiz.q2.forEach((item, i) => {
-                quiz_q2_obj['Методика_2 Вопрос_'+item.id] = item.a;
+                q2_obj['Вопрос #'+item.id] = item.a;
               });
               quiz.q3.forEach((item, i) => {
-                quiz_q3_obj['Методика_3 Вопрос_'+item.id] = item.a;
+                q3_obj['Вопрос #'+item.id] = item.a;
               });
               quiz.q4.forEach((item, i) => {
-                quiz_q4_obj['Методика_4 Вопрос_'+item.id] = item.a;
+                q4_obj['Вопрос #'+item.id] = item.a;
               });
               quiz.q5.forEach((item, i) => {
-                quiz_q5_obj['Методика_5 Вопрос_'+item.id] = item.a;
+                q5_obj['Вопрос #'+item.id] = item.a;
               });
 
               q0_arr.push(q0_obj);
@@ -1458,13 +1426,6 @@ export default {
               q3_arr.push(q3_obj);
               q4_arr.push(q4_obj);
               q5_arr.push(q5_obj);
-
-              quiz_q1_arr.push(quiz_q1_obj);
-              quiz_q2_arr.push(quiz_q2_obj);
-              quiz_q3_arr.push(quiz_q3_obj);
-              quiz_q4_arr.push(quiz_q4_obj);
-              quiz_q5_arr.push(quiz_q5_obj);
-
             }
 
           })
@@ -1475,12 +1436,7 @@ export default {
             methods2: q2_arr,
             methods3: q3_arr,
             methods4: q4_arr,
-            methods5: q5_arr,
-            quiz1: quiz_q1_arr,
-            quiz2: quiz_q2_arr,
-            quiz3: quiz_q3_arr,
-            quiz4: quiz_q4_arr,
-            quiz5: quiz_q5_arr
+            methods5: q5_arr
           }
         })
         .then(() => {
@@ -1490,11 +1446,6 @@ export default {
             methods3WS = XLSX.utils.json_to_sheet(this.ExportE.methods3),
             methods4WS = XLSX.utils.json_to_sheet(this.ExportE.methods4),
             methods5WS = XLSX.utils.json_to_sheet(this.ExportE.methods5),
-            quiz1WS = XLSX.utils.json_to_sheet(this.ExportE.quiz1),
-            quiz2WS = XLSX.utils.json_to_sheet(this.ExportE.quiz2),
-            quiz3WS = XLSX.utils.json_to_sheet(this.ExportE.quiz3),
-            quiz4WS = XLSX.utils.json_to_sheet(this.ExportE.quiz4),
-            quiz5WS = XLSX.utils.json_to_sheet(this.ExportE.quiz5),
             wb = XLSX.utils.book_new()
 
           XLSX.utils.book_append_sheet(wb, anketaWS, 'Анкета')
@@ -1503,11 +1454,6 @@ export default {
           XLSX.utils.book_append_sheet(wb, methods3WS, 'Методика 3')
           XLSX.utils.book_append_sheet(wb, methods4WS, 'Методика 4')
           XLSX.utils.book_append_sheet(wb, methods5WS, 'Методика 5')
-          XLSX.utils.book_append_sheet(wb, quiz1WS, 'Тест 1')
-          XLSX.utils.book_append_sheet(wb, quiz2WS, 'Тест 2')
-          XLSX.utils.book_append_sheet(wb, quiz3WS, 'Тест 3')
-          XLSX.utils.book_append_sheet(wb, quiz4WS, 'Тест 4')
-          XLSX.utils.book_append_sheet(wb, quiz5WS, 'Тест 5')
 
           XLSX.writeFile(wb, 'book_email.xlsx')
         });
