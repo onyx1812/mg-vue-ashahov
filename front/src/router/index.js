@@ -22,6 +22,11 @@ const routes = [
     component: () => import('../views/Report.vue')
   },
   {
+    path: '/rebuild',
+    name: 'rebuild',
+    component: () => import('../views/Rebuild.vue')
+  },
+  {
     path: '*',
     redirect: '/'
   }

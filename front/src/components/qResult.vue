@@ -607,6 +607,158 @@ export default {
 /*------------------------
   END Q5 RESULTS
 ------------------------*/
+/*------------------------
+  QUIZ Results
+------------------------*/
+      let q1Results = {};
+      let q1Inversions = [13, 21, 19, 27, 35];
+      this.q1.forEach(answer => {
+        if( q1Inversions.includes(answer.id) ){
+          if(answer.a == 'Да') q1Results[answer.id] = 0;
+          if(answer.a == 'Нет') q1Results[answer.id] = 1;
+        } else {
+          if(answer.a == 'Да') q1Results[answer.id] = 1;
+          if(answer.a == 'Нет') q1Results[answer.id] = 0;
+        }
+      });
+
+      let q2Results = {};
+      let q2Inversions = [1, 11, 36, 46, 56, 61, 71, 81, 96, 106, 116, 121, 141, 156, 166, 176, 181, 206, 231, 236];
+      this.q2.forEach(answer => {
+        if( q2Inversions.includes(answer.id) ){
+          if(answer.a == 'абсолютно не согласен') q2Results[answer.id] = 4;
+          if(answer.a == 'не согласен') q2Results[answer.id] = 3;
+          if(answer.a == 'нейтрально') q2Results[answer.id] = 2;
+          if(answer.a == 'согласен') q2Results[answer.id] = 1;
+          if(answer.a == 'абсолютно согласен') q2Results[answer.id] = 0;
+        } else {
+          if(answer.a == 'абсолютно не согласен') q2Results[answer.id] = 0;
+          if(answer.a == 'не согласен') q2Results[answer.id] = 1;
+          if(answer.a == 'нейтрально') q2Results[answer.id] = 2;
+          if(answer.a == 'согласен') q2Results[answer.id] = 3;
+          if(answer.a == 'абсолютно согласен') q2Results[answer.id] = 4;
+        }
+      });
+
+      let q3Results = {};
+      let q3Inversions = [49, 99, 3, 8, 23, 53, 67, 71, 79, 113, 33, 20, 87, 59, 16, 20, 31, 47, 84];
+      this.q3.forEach(answer => {
+        if( q3Inversions.includes(answer.id) ){
+          if(answer.a == 'Да') q3Results[answer.id] = 0;
+          if(answer.a == 'Нет') q3Results[answer.id] = 1;
+        } else {
+          if(answer.a == 'Да') q3Results[answer.id] = 1;
+          if(answer.a == 'Нет') q3Results[answer.id] = 0;
+        }
+      });
+
+      let q4Results = {};
+      this.q4.forEach(answer => {
+        if(answer.id == 1 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 13 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 25 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 37 && answer.a == 'Нет'){ q4Results[answer.id] = 3; }
+        else if(answer.id == 49 && answer.a == 'Да' ){ q4Results[answer.id] = 10; }
+        else if(answer.id == 61 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 73 && answer.a == 'Нет'){ q4Results[answer.id] = 5; }
+        else if(answer.id == 2 && answer.a == 'Нет' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 14 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 26 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 38 && answer.a == 'Нет'){ q4Results[answer.id] = 10; }
+        else if(answer.id == 50 && answer.a == 'Нет'){ q4Results[answer.id] = 5; }
+        else if(answer.id == 62 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 74 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 3 && answer.a == 'Да'  ){ q4Results[answer.id] = 10; }
+        else if(answer.id == 15 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 27 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 39 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 51 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 63 && answer.a == 'Да' ){ q4Results[answer.id] = 1; }
+        else if(answer.id == 75 && answer.a == 'Нет'){ q4Results[answer.id] = 5; }
+        else if(answer.id == 4 && answer.a == 'Да'  ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 16 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 28 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 40 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 52 && answer.a == 'Да' ){ q4Results[answer.id] = 10; }
+        else if(answer.id == 64 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 76 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 5 && answer.a == 'Да'  ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 17 && answer.a == 'Нет'){ q4Results[answer.id] = 3; }
+        else if(answer.id == 29 && answer.a == 'Да' ){ q4Results[answer.id] = 10; }
+        else if(answer.id == 41 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 53 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 65 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 77 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 6 && answer.a == 'Да'  ){ q4Results[answer.id] = 10; }
+        else if(answer.id == 18 && answer.a == 'Нет'){ q4Results[answer.id] = 3; }
+        else if(answer.id == 30 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 42 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 54 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 66 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 78 && answer.a == 'Нет'){ q4Results[answer.id] = 5; }
+        else if(answer.id == 7 && answer.a == 'Да'  ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 19 && answer.a == 'Да' ){ q4Results[answer.id] = 10; }
+        else if(answer.id == 31 && answer.a == 'Нет'){ q4Results[answer.id] = 2; }
+        else if(answer.id == 43 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 55 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 67 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 79 && answer.a == 'Нет'){ q4Results[answer.id] = 5; }
+        else if(answer.id == 8 && answer.a == 'Да'  ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 20 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 32 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 44 && answer.a == 'Нет'){ q4Results[answer.id] = 2; }
+        else if(answer.id == 56 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 68 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 80 && answer.a == 'Да' ){ q4Results[answer.id] = 10; }
+        else if(answer.id == 9 && answer.a == 'Да'  ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 21 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 33 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 45 && answer.a == 'Нет'){ q4Results[answer.id] = 5; }
+        else if(answer.id == 57 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 69 && answer.a == 'Нет'){ q4Results[answer.id] = 10; }
+        else if(answer.id == 81 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 10 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 22 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 34 && answer.a == 'Нет'){ q4Results[answer.id] = 2; }
+        else if(answer.id == 46 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 58 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 70 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 82 && answer.a == 'Да' ){ q4Results[answer.id] = 10; }
+        else if(answer.id == 11 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 23 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 35 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 47 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 59 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 72 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 83 && answer.a == 'Да' ){ q4Results[answer.id] = 10; }
+        else if(answer.id == 12 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 24 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 36 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else if(answer.id == 48 && answer.a == 'Да' ){ q4Results[answer.id] = 3; }
+        else if(answer.id == 60 && answer.a == 'Да' ){ q4Results[answer.id] = 2; }
+        else if(answer.id == 72 && answer.a == 'Да' ){ q4Results[answer.id] = 10; }
+        else if(answer.id == 84 && answer.a == 'Да' ){ q4Results[answer.id] = 5; }
+        else{ q4Results[answer.id] = 0; }
+      });
+
+      let q5Results = {};
+      let q5Inversions = [47, 51, 107, 123, 18, 34, 36, 128, 25, 57, 63, 116];
+      this.q5.forEach(answer => {
+        if( q5Inversions.includes(answer.id) ){
+          if(answer.a == 'Да') q5Results[answer.id] = 0;
+          if(answer.a == 'Нет') q5Results[answer.id] = 2;
+          if(answer.a == 'Не знаю') q5Results[answer.id] = 1;
+        } else {
+          if(answer.a == 'Да') q5Results[answer.id] = 2;
+          if(answer.a == 'Нет') q5Results[answer.id] = 0;
+          if(answer.a == 'Не знаю') q5Results[answer.id] = 1;
+        }
+      });
+/*-----------------------
+  END Quiz Results
+------------------------*/
+
+
     const data = {
       qIde: this.qIde,
       q0: this.q0,
@@ -891,6 +1043,14 @@ export default {
         q3: this.q3,
         q4: this.q4,
         q5: this.q5
+      },
+      quizResulst: {
+        q0: this.q0,
+        q1: q1Results,
+        q2: q2Results,
+        q3: q3Results,
+        q4: q4Results,
+        q5: q5Results
       }
     }
 

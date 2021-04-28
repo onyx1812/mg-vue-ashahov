@@ -1,6 +1,6 @@
 module.exports = {
   host:     'localhost',
-  database: 'mg-vue-ashahov',
-  user:     'mysql',
-  password: 'mysql'
+  database: 'oprosnik',
+  user:     'oprosnik',
+  password: 'Zaqwsx18012021!'
 }
